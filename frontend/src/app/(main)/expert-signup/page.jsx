@@ -1,6 +1,7 @@
 'use client';
 import axios from 'axios';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
@@ -21,6 +22,8 @@ const SignupSchema = Yup.object().shape({
 
 const expertSignup = () => {
 
+  const router = useRouter();
+
   const signupForm = useFormik({
     initialValues: {
       name: "",
@@ -32,26 +35,27 @@ const expertSignup = () => {
       const { name, email, password } = values;
       axios.post(`http://localhost:5000/expert/add`, { name, email, password })
         .then((result) => {
-          toast.success("User Created Successfully");
+          toast.success("Expert Created Successfully");
           resetForm();
+          router.push('/expert-login')
         }).catch((err) => {
           console.log(err);
-          toast.error("User Creation Failed");
+          toast.error("Expert Creation Failed");
         });
     },
     validationSchema: SignupSchema,
   })
   return (
     <div>
-      <div className="bg-gray-100 flex h-screen items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="bg-black flex h-screen items-center justify-center px-4 sm:px-6 lg:px-8" style={{color:'#111'}}>
         <div className="w-full max-w-md space-y-8">
           <div className="bg-white shadow-md rounded-md p-6">
             <img
               className="mx-auto h-12 w-auto"
-              src="https://www.svgrepo.com/show/499664/user-happy.svg"
+              src="https://www.svgrepo.com/show/499664/expert-happy.svg"
               alt=""
             />
-            <h2 className="my-3 text-center text-3xl font-bold tracking-tight text-gray-900">
+            <h2 className="my-3 text-center text-3xl font-bold tracking-tight text-gray-900" style={{color:'#111'}}>
               Sign up for an account
             </h2>
             <form className="space-y-6" method="POST" onSubmit={signupForm.handleSubmit}>
@@ -69,7 +73,8 @@ const expertSignup = () => {
                     id='name'
                     onChange={signupForm.handleChange}
                     value={signupForm.values.name}
-                    className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    placeholder="Enter your name"                className="px-2 py-3 mt-1 block w-full rounded-md border border-black border-solid shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    style={{color:'#111', background:'#fff'}}
                   />
                 </div>
                 {signupForm.touched.name && signupForm.errors.name && (
@@ -90,7 +95,9 @@ const expertSignup = () => {
                     autoComplete="email-address"
                     onChange={signupForm.handleChange}
                     value={signupForm.values.email}
-                    className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    placeholder="Enter your email"
+                    className="px-2 py-3 mt-1 block w-full rounded-md border border-black border-solid shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    style={{color:'#111', background:'#fff'}}
                   />
                 </div>
                 {signupForm.touched.email && signupForm.errors.email && (
@@ -111,7 +118,9 @@ const expertSignup = () => {
                     autoComplete="password"
                     onChange={signupForm.handleChange}
                     value={signupForm.values.password}
-                    className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    placeholder="Enter your password"
+                    className="px-2 py-3 mt-1 block w-full rounded-md border border-black border-solid shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    style={{color:'#111', background:'#fff'}}
                   />
                 </div>
                 {signupForm.touched.password && signupForm.errors.password && (
@@ -132,7 +141,9 @@ const expertSignup = () => {
                     autoComplete="confirm-password"
                     onChange={signupForm.handleChange}
                     value={signupForm.values.confirmPassword}
-                    className="px-2 py-3 mt-1 block w-full rounded-md border border-gray-400 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    placeholder="Confirm your password"
+                    className="px-2 py-3 mt-1 block w-full rounded-md border border-black border-solid shadow-sm focus:border-sky-500 focus:outline-none focus:ring-sky-500 sm:text-sm text-black"
+                    style={{color:'#111', background:'#fff'}}
                   />
                 </div>
                 {signupForm.touched.confirmPassword && signupForm.errors.confirmPassword && (

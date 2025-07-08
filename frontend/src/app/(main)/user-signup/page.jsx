@@ -1,6 +1,7 @@
 'use client';
 import axios from 'axios';
 import { useFormik } from 'formik';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 import toast from 'react-hot-toast';
 import * as Yup from 'yup';
@@ -20,6 +21,7 @@ const SignupSchema = Yup.object().shape({
 })
 
 const Signup = () => {
+const router = useRouter();
 
   const signupForm = useFormik({
     initialValues: {
@@ -35,6 +37,8 @@ const Signup = () => {
         .then((result) => {
           toast.success("User Created Successfully");
           resetForm();
+          router.push('/user-login')
+
         }).catch((err) => {
           console.log(err);
           toast.error("User Creation Failed");
@@ -44,22 +48,38 @@ const Signup = () => {
   })
 
   return (
-    <div className="w-2/5 mx-auto mt-7 bg-white border border-gray-200 rounded-xl shadow-2xs dark:bg-neutral-900 dark:border-neutral-700">
-      <div className="p-4 sm:p-7">
+    <div className="min-h-screen flex flex-col items-center justify-center" style={{width: '100vw', background: '#000'}}>
+      <div className="w-full flex flex-col items-center mb-6 mt-8">
+        <span className="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 tracking-wide uppercase drop-shadow-lg">Create Your Account</span>
+      </div>
+      <div className="w-full max-w-md bg-white border border-gray-200 rounded-xl shadow-2xs dark:bg-white dark:border-neutral-700 p-6 sm:p-10 flex flex-col justify-center" style={{color:'#111', minHeight: 600}}>
         <div className="text-center">
-          <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
+          <h1 className="block text-2xl font-bold text-gray-800 dark:text-white" style={{color:'#111'}}>
             Sign up
           </h1>
-          <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400">
+          <p className="mt-2 text-sm text-gray-600 dark:text-neutral-400" style={{color:'#111'}}>
             Already have an account?
             <a
               className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500"
-              href="../examples/html/signin.html"
+              href="/user-login"
+              style={{color:'#1976d2'}}
             >
-              Sign in here
+              Login here
             </a>
           </p>
         </div>
+        <div>
+            <p className="mt-2 text-sm text-center text-gray-600 dark:text-neutral-400" style={{color:'#111'}}>
+        Are you expert?
+        <a
+          className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500"
+          href="/expert-login"
+          style={{color:'#1976d2'}}
+        >
+          Login here
+        </a>
+        </p>
+          </div>
         <div className="mt-5">
           <button
             type="button"
@@ -101,7 +121,7 @@ const Signup = () => {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-sm mb-2 dark:text-white"
+                  className="block text-sm mb-2 dark:text-gray-900"
                 >
                   Name
                 </label>
@@ -110,9 +130,12 @@ const Signup = () => {
                     type="text"
                     id="name"
                     name="name"
+                    placeholder='Enter your name'
                     onChange={signupForm.handleChange}
                     value={signupForm.values.name}
-                    className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+
+                    className="py-2.5 sm:py-3 px-4 block w-full border border-black border-solid rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    style={{color:'#111', background:'#fff'}}
 
                     aria-describedby="name-error"
                   />
@@ -142,7 +165,7 @@ const Signup = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm mb-2 dark:text-white"
+                  className="block text-sm mb-2 dark:text-gray-900"
                 >
                   Email address
                 </label>
@@ -151,9 +174,11 @@ const Signup = () => {
                     type="email"
                     id="email"
                     name="email"
+                    placeholder='Enter your email'
                     onChange={signupForm.handleChange}
                     value={signupForm.values.email}
-                    className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    className="py-2.5 sm:py-3 px-4 block w-full border border-black border-solid rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    style={{color:'#111', background:'#fff'}}
 
                     aria-describedby="email-error"
                   />
@@ -183,7 +208,7 @@ const Signup = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-sm mb-2 dark:text-white"
+                  className="block text-sm mb-2 dark:text-gray-900"
                 >
                   Password
                 </label>
@@ -192,9 +217,11 @@ const Signup = () => {
                     type="password"
                     id="password"
                     name="password"
+                    placeholder='Enter your password'
                     onChange={signupForm.handleChange}
                     value={signupForm.values.password}
-                    className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    className="py-2.5 sm:py-3 px-4 block w-full border border-black border-solid rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    style={{color:'#111', background:'#fff'}}
 
                     aria-describedby="password-error"
                   />
@@ -224,7 +251,7 @@ const Signup = () => {
               <div>
                 <label
                   htmlFor="confirm-password"
-                  className="block text-sm mb-2 dark:text-white"
+                  className="block text-sm mb-2 dark:text-gray-900"
                 >
                   Confirm Password
                 </label>
@@ -233,9 +260,11 @@ const Signup = () => {
                     type="password"
                     id="confirmPassword"
                     name="confirmPassword"
+                    placeholder='Enter your confirm password'
                     onChange={signupForm.handleChange}
                     value={signupForm.values.confirmPassword}
-                    className="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    className="py-2.5 sm:py-3 px-4 block w-full border border-black border-solid rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                    style={{color:'#111', background:'#fff'}}
 
                     aria-describedby="confirmPassword-error"
                   />
@@ -272,11 +301,12 @@ const Signup = () => {
                   />
                 </div>
                 <div className="ms-3">
-                  <label htmlFor="remember-me" className="text-sm dark:text-white">
+                  <label htmlFor="remember-me" className="text-sm dark:text-gray-900">
                     I accept the{" "}
                     <a
                       className="text-blue-600 decoration-2 hover:underline focus:outline-hidden focus:underline font-medium dark:text-blue-500"
                       href="#"
+                      style={{color:'#1976d2'}}
                     >
                       Terms and Conditions
                     </a>

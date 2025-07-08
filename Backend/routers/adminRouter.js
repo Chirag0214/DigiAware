@@ -107,4 +107,31 @@ router.post('/authenticate', (req, res) => {
         });
 })
 
+// Route to get admin dashboard stats
+router.get('/stats', async (req, res) => {
+    try {
+        const User = require('../models/userModel');
+        const Expert = require('../models/expertModel');
+        const News = require('../models/addNewsModel');
+        const Artical = require('../models/addArticalModel');
+
+        const [userCount, expertCount, newsCount, articalCount] = await Promise.all([
+            User.countDocuments(),
+            Expert.countDocuments(),
+            News.countDocuments(),
+            Artical.countDocuments()
+        ]);
+
+        res.status(200).json({
+            users: userCount,
+            experts: expertCount,
+            news: newsCount,
+            articles: articalCount
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch stats', details: err });
+    }
+});
+
 module.exports = router;
