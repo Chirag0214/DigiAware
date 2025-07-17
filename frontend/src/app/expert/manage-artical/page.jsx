@@ -45,45 +45,45 @@ const ManageArtical = () => {
                         (
                             <div className="overflow-x-auto">
                                 <table className="w-full border-separate border-spacing-y-2">
-                                    <thead className="bg-sky-700 dark:bg-sky-900 text-white">
-                                        <tr className="text-left">
-                                            <th className="px-3 py-2">ID</th>
-                                            <th className="px-3 py-2">Name</th>
-                                            <th className="px-3 py-2">Email</th>
-                                            <th className="px-3 py-2">Registered At</th>
-                                            <th className="px-3 py-2">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="text-left">
-                                        {
-                                            articalList.map((artical) => (
-                                                <tr key={artical._id} className="bg-white dark:bg-gray-700 border-b hover:bg-sky-50 dark:hover:bg-sky-800 transition-colors">
-                                                    <td className="p-3 text-xs break-all text-gray-700 dark:text-gray-200">{artical._id}</td>
-                                                    <td className="p-3 text-gray-800 dark:text-gray-100">{artical.name}</td>
-                                                    <td className="p-3 text-gray-700 dark:text-gray-200">{artical.email}</td>
-                                                    <td className="p-3 text-gray-700 dark:text-gray-200">
-                                                        {artical.createdAt ? new Date(artical.createdAt).toLocaleString() : "N/A"}
-                                                    </td>
-                                                    <td className="p-3">
-                                                        <div className="flex gap-2">
-                                                            <button className="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white px-4 py-2 rounded-2xl border border-blue-800 transition-colors flex items-center gap-2">
-                                                                <Link href={`/expert/update-artical/${artical._id}`} className="flex items-center gap-1">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-1.414.828l-4 1a1 1 0 01-1.263-1.263l1-4a4 4 0 01.828-1.414z" /></svg>
-                                                                    Update
-                                                                </Link>
-                                                            </button>
-                                                            <button
-                                                                onClick={() => { deleteArtical(artical._id) }}
-                                                                className="bg-red-600 hover:bg-red-500 active:bg-red-700 text-white px-4 py-2 rounded-2xl border border-red-800 transition-colors flex items-center"
-                                                                title="Delete artical">
-                                                                <IconTrash size={22} />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
+                                   <thead className="bg-sky-700 dark:bg-sky-900 text-white">
+  <tr className="text-left">
+    <th className="px-3 py-2">ID</th>
+    <th className="px-3 py-2">Title</th>
+    <th className="px-3 py-2">Content</th>
+    <th className="px-3 py-2">Image</th>
+    <th className="px-3 py-2">Actions</th>
+  </tr>
+</thead>
+<tbody className="text-left">
+  {articalList.map((artical) => (
+    <tr key={artical._id} className="bg-white dark:bg-gray-700 border-b hover:bg-sky-50 dark:hover:bg-sky-800 transition-colors">
+      <td className="p-3 text-xs break-all text-gray-700 dark:text-gray-200">{artical._id}</td>
+      <td className="p-3 text-gray-800 dark:text-gray-100 font-semibold">{artical.title}</td>
+      <td className="p-3 text-gray-700 dark:text-gray-200 max-w-xs truncate" title={artical.content}>{artical.content}</td>
+      <td className="p-3 text-gray-700 dark:text-gray-200">
+        {artical.image ? (
+          <img src={artical.image} alt="artical" className="h-16 w-24 object-cover rounded border border-gray-300 dark:border-gray-600" />
+        ) : (
+          <span className="italic text-gray-400">No Image</span>
+        )}
+      </td>
+      <td className="p-3">
+        <div className="flex gap-2">
+          <Link href={`/expert/update-artical/${artical._id}`} className="bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white px-4 py-2 rounded-2xl border border-blue-800 transition-colors flex items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536M9 13l6.586-6.586a2 2 0 112.828 2.828L11.828 15.828a4 4 0 01-1.414.828l-4 1a1 1 0 01-1.263-1.263l1-4a4 4 0 01.828-1.414z" /></svg>
+            Update
+          </Link>
+          <button
+            onClick={() => { deleteArtical(artical._id) }}
+            className="bg-red-600 hover:bg-red-500 active:bg-red-700 text-white px-4 py-2 rounded-2xl border border-red-800 transition-colors flex items-center"
+            title="Delete artical">
+            <IconTrash size={22} />
+          </button>
+        </div>
+      </td>
+    </tr>
+  ))}
+</tbody>
                                 </table>
                             </div>
                         )

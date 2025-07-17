@@ -32,6 +32,16 @@ const Profile = () => {
           }
         );
 
+        if (!response.data) {
+          // Handle null/undefined data
+          setLoading(false);
+          setExpert(null);
+          setFormInitialValues({ name: "", email: "" });
+          // Optionally show an error or redirect
+          // router.push("/expert-signin");
+          return;
+        }
+
         setExpert(response.data);
         setFormInitialValues({
           name: response.data.name,

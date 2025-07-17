@@ -3,7 +3,7 @@ const cors = require('cors');
 const UserRouter = require('./routers/userRouter');
 const AdminRouter = require('./routers/adminRouter')
 const ExpertRouter = require('./routers/expertRouter')
-const AddArticalRouter = require('./routers/addArticalModel');
+const AddArticalRouter = require('./routers/addArticalRouter');
 const AddNewsRouter = require('./routers/addNewsRouter');
 const QueryRouter = require('./routers/queryRouter');
 const feedbackRouter = require('./routers/feedbackRouter');
@@ -31,7 +31,6 @@ app.get('/getall', (req, res) => { //see all data
 app.get('/add', (req, res) => { //add data
     res.send('Response from Add Route');
 });
-
 
 
 

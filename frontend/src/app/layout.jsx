@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <Toaster position="top-right" />
         {/* <Navbar/> */}
         <FeedbackButton />
-        <div className="">
+        <div className="pt-20 min-h-screen">
           {children}
         </div>
         <Footer />

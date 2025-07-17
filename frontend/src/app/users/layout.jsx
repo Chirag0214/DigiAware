@@ -5,7 +5,7 @@ export default function AdminLayout({ children }) {
   return (
     <>
       <UserNavbar />
-      <main className='py-20'>
+      <main className='py bg-zinc-950'>
         {children}
       </main>
     </>

@@ -100,7 +100,7 @@ const QueryForm = ({ onSuccess }) => {
         {/* Status is hidden, default to pending */}
         <button
           type="submit"
-          className="w-full bg-zinc-700 text-white py-2 rounded hover:bg-zinc-800"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors duration-200"
           disabled={loading}
         >
           {loading ? 'Submitting...' : 'Submit Query'}
@@ -207,13 +207,13 @@ const QueryList = ({ refresh }) => {
   if (!queries.length) return <div className="text-center mt-6">No queries found.</div>;
 
   return (
-    <div className="max-w-5xl mx-auto mt-10 p-4 sm:p-6 bg-zinc-900 rounded shadow">
-      <h2 className="text-2xl font-bold mb-4 text-center text-zinc-100">Your Queries</h2>
-      <div className="flex flex-col sm:flex-row gap-4 mb-6 items-center justify-between">
-        <div className="flex items-center gap-2">
+    <div className="max-w-5xl mx-auto mt-10 p-4 sm:p-8 bg-zinc-900 rounded-2xl shadow-lg border border-zinc-800">
+      <h2 className="text-3xl font-bold mb-8 text-center text-zinc-100 tracking-tight">Your Queries</h2>
+      <div className="flex flex-col md:flex-row gap-4 mb-8 items-center justify-between">
+        <div className="flex items-center gap-2 w-full md:w-auto">
           <label className="text-zinc-300 font-semibold">Filter by Status:</label>
           <select
-            className="border border-zinc-700 rounded px-2 py-1 bg-zinc-800 text-zinc-100 focus:ring-2 focus:ring-zinc-600"
+            className="border border-zinc-700 rounded px-2 py-1 bg-zinc-800 text-zinc-100 focus:ring-2 focus:ring-blue-600"
             value={filter}
             onChange={e => { setFilter(e.target.value); setPage(1); }}
           >
@@ -223,27 +223,45 @@ const QueryList = ({ refresh }) => {
             <option value="closed">Closed</option>
           </select>
         </div>
-        {deleteMsg && <div className="text-green-400 font-semibold">{deleteMsg}</div>}
+        {deleteMsg && <div className="text-green-400 font-semibold text-center w-full md:w-auto">{deleteMsg}</div>}
         <div className="flex-1" />
-        <div className="text-zinc-400 text-sm text-right hidden sm:block">
+        <div className="text-zinc-400 text-sm text-right hidden md:block">
           Showing {paginatedQueries.length} of {filteredQueries.length} queries
         </div>
       </div>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {paginatedQueries.map((q) => (
-          <div key={q._id} className="bg-zinc-800 rounded-lg shadow p-4 flex flex-col md:flex-row md:items-start gap-4 border border-zinc-700">
-            <div className="flex-1 space-y-2">
-              <div><span className="font-semibold text-zinc-300">Subject:</span> <span className="text-zinc-100">{q.subject}</span></div>
-              <div><span className="font-semibold text-zinc-300">Message:</span> <span className="text-zinc-100">{q.message}</span></div>
-              <div><span className="font-semibold text-zinc-300">Priority:</span> <span className="text-zinc-100">{priorityIcon(q.priority)} <span className="ml-1 capitalize">{q.priority}</span></span></div>
+          <div key={q._id} className="bg-zinc-800 rounded-xl shadow p-6 flex flex-col md:flex-row md:items-start gap-6 border border-zinc-700 hover:border-blue-600 transition-all overflow-x-auto">
+            <div className="flex-1 space-y-3 min-w-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="font-semibold text-zinc-300">Subject:</span>
+                <span className="text-zinc-100 break-words whitespace-pre-line min-w-0 max-w-full">{q.subject}</span>
+              </div>
+              <div className="flex items-start gap-2 min-w-0">
+                <span className="font-semibold text-zinc-300">Message:</span>
+                <span className="text-zinc-100 break-words whitespace-pre-line min-w-0 max-w-full">{q.message}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-zinc-300">Priority:</span>
+                <span className="text-zinc-100 flex items-center">{priorityIcon(q.priority)}<span className="ml-2 capitalize">{q.priority}</span></span>
+              </div>
             </div>
-            <div className="flex flex-col gap-2 md:w-72 w-full">
-              <div><span className="font-semibold text-zinc-300">Status:</span> <span className="text-zinc-100">{statusIcon(q.status)} <span className="ml-1 capitalize">{q.status}</span></span></div>
-              <div><span className="font-semibold text-zinc-300">Reply:</span> <span className="text-zinc-100">{q.responses && q.responses.length > 0 ? q.responses[q.responses.length - 1].message : <span className="italic text-zinc-400">No reply yet</span>}</span></div>
-              <div><span className="font-semibold text-zinc-300">Created:</span> <span className="text-zinc-100 whitespace-nowrap">{new Date(q.createdAt).toLocaleString()}</span></div>
+            <div className="flex flex-col gap-3 md:w-80 w-full min-w-0">
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-zinc-300">Status:</span>
+                <span className="text-zinc-100 flex items-center">{statusIcon(q.status)}<span className="ml-2 capitalize">{q.status}</span></span>
+              </div>
+              <div className="flex items-start gap-2 min-w-0">
+                <span className="font-semibold text-zinc-300">Reply:</span>
+                <span className="text-zinc-100 break-words whitespace-pre-line min-w-0 max-w-full">{q.responses && q.responses.length > 0 ? q.responses[q.responses.length - 1].message : <span className="italic text-zinc-400">No reply yet</span>}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-zinc-300">Created:</span>
+                <span className="text-zinc-100 whitespace-nowrap">{new Date(q.createdAt).toLocaleString()}</span>
+              </div>
               {q.user === userId && (
                 <button
-                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-semibold shadow-sm transition mt-2"
+                  className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-semibold shadow-sm transition mt-2 w-fit self-end"
                   onClick={() => handleDelete(q._id)}
                 >Delete</button>
               )}
@@ -253,15 +271,15 @@ const QueryList = ({ refresh }) => {
       </div>
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex flex-col sm:flex-row justify-center items-center mt-6 gap-2">
+        <div className="flex flex-col sm:flex-row justify-center items-center mt-10 gap-3">
           <button
-            className="px-3 py-1 bg-zinc-700 text-white rounded disabled:opacity-50 font-semibold"
+            className="px-4 py-2 bg-zinc-700 text-white rounded disabled:opacity-50 font-semibold"
             onClick={() => setPage(page - 1)}
             disabled={page === 1}
           >Prev</button>
-          <span className="text-zinc-200 px-3 text-base">Page {page} of {totalPages}</span>
+          <span className="text-zinc-200 px-4 text-base">Page {page} of {totalPages}</span>
           <button
-            className="px-3 py-1 bg-zinc-700 text-white rounded disabled:opacity-50 font-semibold"
+            className="px-4 py-2 bg-zinc-700 text-white rounded disabled:opacity-50 font-semibold"
             onClick={() => setPage(page + 1)}
             disabled={page === totalPages}
           >Next</button>

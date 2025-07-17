@@ -47,6 +47,17 @@ const AddArtical = () => {
             throw new Error('Image upload failed');
           }
         }
+        // Get expertId from JWT token in localStorage
+        let expertId = '';
+        try {
+          const token = localStorage.getItem('token');
+          if (token) {
+            const decoded = JSON.parse(atob(token.split('.')[1]));
+            expertId = decoded._id;
+          }
+        } catch (e) {
+          // ignore, expertId will be empty
+        }
         const response = await fetch('http://localhost:5000/artical/add', {
           method: 'POST',
           headers: {
@@ -56,6 +67,7 @@ const AddArtical = () => {
             title: values.title,
             content: values.content,
             image: uploadedImageUrl,
+            expertId: expertId,
           }),
         });
         if (!response.ok) {
