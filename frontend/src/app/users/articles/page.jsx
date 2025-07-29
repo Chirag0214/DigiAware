@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { getAllArticals } from '@/utils/articalApi';
+import { getAllArticles } from '@/utils/articleApi';
+import Link from 'next/link';
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
@@ -8,7 +9,7 @@ const Articles = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    getAllArticals()
+    getAllArticles()
       .then((data) => {
         setArticles(data);
         setLoading(false);
@@ -30,18 +31,16 @@ const Articles = () => {
           <div className='col-span-full text-center text-gray-500'>No articles found.</div>
         ) : (
           articles.map((item) => (
-            <div key={item._id} className='bg-white rounded-lg shadow p-4 flex flex-col'>
+            <Link key={item._id} href={`/users/view-articles/${item._id}`} className='bg-white rounded-lg shadow p-4 flex flex-col hover:shadow-lg transition-shadow'>
               {item.image && (
                 <img src={item.image} alt={item.title} className='w-full h-40 object-cover rounded mb-2' />
               )}
               <h2 className='text-xl text-black font-bold mb-2'>{item.title}</h2>
-              <p className='text-gray-700 mb-2 overflow-hidden text-ellipsis line-clamp-4 max-h-24'>
-                {item.content}
-              </p>
+              <p className='text-gray-700 mb-2 break-words line-clamp-4'>{item.content}</p>
               <span className='text-xs text-gray-400 mt-auto'>
                 {item.createdAt ? new Date(item.createdAt).toLocaleString() : ''}
               </span>
-            </div>
+            </Link>
           ))
         )}
       </div>

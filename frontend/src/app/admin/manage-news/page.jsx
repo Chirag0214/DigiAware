@@ -21,7 +21,7 @@ const ManageNews = () => {
 
 
     const deleteNews = async (newsId) => {
-        const res = await axios.delete(`http://localhost:5000/news/delete/${newstId}`);
+        const res = await axios.delete(`http://localhost:5000/news/delete/${newsId}`);
         if (res.status === 200) {
             fetchNews();
             toast.success('News Deleted Successfully');

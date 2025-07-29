@@ -4,12 +4,12 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-10 mt-20">
+    <footer className="w-full bg-white dark:bg-neutral-900 border-t border-gray-200 dark:border-neutral-800 py-6 font-[Raleway,Montserrat,sans-serif]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-20">
         {/* Company Info */}
         <div className='md:col-span-2 px-10'>
-          <div className='flex items-center justify-evenly'>
-            <img className='size-25 rounded-full' src="/logo.png" alt="Digi Aware logo" />
+          <div className='flex items-center gap-5'>
+            <img className='size-20 rounded-full' src="/logo.png" alt="Digi Aware logo" />
             <h2 className="text-2xl font-bold mb-3">Digi Aware</h2>
           </div>
           <p className="text-sm text-center mt-2">
@@ -21,7 +21,7 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="/" className="hover:text-blue-300">Home</a></li>
-            <li><a href="/browse-artical" className="hover:text-blue-300">Article</a></li>
+            <li><a href="/browse-article" className="hover:text-blue-300">Article</a></li>
             <li><a href="/browse-news" className="hover:text-blue-300">News</a></li>
             <li><a href="/contact" className="hover:text-blue-300">Contact</a></li>
           </ul>

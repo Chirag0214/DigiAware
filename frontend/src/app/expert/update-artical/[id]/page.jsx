@@ -5,20 +5,20 @@ import { useParams, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 
-const UpdateArtical = () => {
+const UpdateArticle = () => {
     const { id } = useParams();
     const router = useRouter();
 
-    const [articalData, setArticalData] = useState(null);
+    const [articleData, setArticleData] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const CLOUDINARY_CLOUD_NAME = 'your_cloud_name';
     const CLOUDINARY_UPLOAD_PRESET = 'your_upload_preset';
 
-    const fetchArtical = async () => {
+    const fetchArticle = async () => {
         try {
-            const res = await axios.get(`http://localhost:5000/artical/getbyid/${id}`);
-            setArticalData(res.data);
+            const res = await axios.get(`http://localhost:5000/article/getbyid/${id}`);
+            setArticleData(res.data);
         } catch (error) {
             toast.error('Error fetching article');
             console.error(error);
@@ -26,7 +26,7 @@ const UpdateArtical = () => {
     };
 
     useEffect(() => {
-        fetchArtical();
+        fetchArticle();
     }, []);
 
     const handleUpdate = async (values, { setSubmitting }) => {
@@ -54,10 +54,10 @@ const UpdateArtical = () => {
                 content: values.content,
                 image: imageUrl
             };
-            const res = await axios.put(`http://localhost:5000/artical/update/${id}` , updateData);
+            const res = await axios.put(`http://localhost:5000/article/update/${id}` , updateData);
             if (res.status === 200) {
                 toast.success('Article Updated Successfully');
-                router.push('/expert/manage-artical');
+                router.push('/expert/manage-article');
             }
         } catch (error) {
             toast.error('Error updating article');
@@ -72,14 +72,14 @@ const UpdateArtical = () => {
         <div className="max-w-xl mx-auto p-6">
             <h1 className='text-4xl text-center font-bold mb-6'>Update Article</h1>
             <div className='container mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-lg'>
-                {articalData === null ? (
+                {articleData === null ? (
                     <p className="text-center">Loading...Please Wait</p>
                 ) : (
                     <Formik
                         initialValues={{
-                            title: articalData.title || '',
-                            content: articalData.content || '',
-                            image: articalData.image || '',
+                            title: articleData.title || '',
+                            content: articleData.content || '',
+                            image: articleData.image || '',
                             newImage: null
                         }}
                         onSubmit={handleUpdate}
@@ -159,4 +159,4 @@ const UpdateArtical = () => {
     );
 };
 
-export default UpdateArtical;
+export default UpdateArticle;

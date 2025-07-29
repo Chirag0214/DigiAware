@@ -31,7 +31,7 @@ const ViewNews = () => {
   if (!news) return null;
 
   return (
-    <div className="max-w-2xl mx-auto py-8">
+    <div className="max-w-3xl mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6 text-center text-blue-400">{news.title}</h1>
       <div className="bg-white rounded-lg shadow p-6">
         {news.image && (

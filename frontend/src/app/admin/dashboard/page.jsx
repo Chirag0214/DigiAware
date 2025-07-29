@@ -8,7 +8,7 @@ export default function AdminDashboard() {
     { label: 'Users', count: 0, link: '/admin/manage-user' },
     { label: 'Experts', count: 0, link: '/admin/manage-expert' },
     { label: 'News', count: 0, link: '/admin/manage-news' },
-    { label: 'Articles', count: 0, link: '/expert/manage-artical' },
+    { label: 'Articles', count: 0, link: '/expert/manage-article' },
   ]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +22,7 @@ export default function AdminDashboard() {
           { label: 'Users', count: data.users, link: '/admin/manage-user' },
           { label: 'Experts', count: data.experts, link: '/admin/manage-expert' },
           { label: 'News', count: data.news, link: '/admin/manage-news' },
-          { label: 'Articles', count: data.articles, link: '/expert/manage-artical' },
+          { label: 'Articles', count: data.articles, link: '/expert/manage-article' },
         ]);
         setLoading(false);
       } catch (err) {

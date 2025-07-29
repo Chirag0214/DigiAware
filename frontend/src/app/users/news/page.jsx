@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { getAllNews } from '@/utils/newsApi';
+import Link from 'next/link';
 
 const News = () => {
   const [news, setNews] = useState([]);
@@ -30,7 +31,7 @@ const News = () => {
           <div className='col-span-full text-center text-gray-500'>No news found.</div>
         ) : (
           news.map((item) => (
-            <div key={item._id} className='bg-white rounded-lg shadow p-4 flex flex-col'>
+            <Link key={item._id} href={`/users/view-news/${item._id}`} className='bg-white rounded-lg shadow p-4 flex flex-col hover:shadow-lg transition-shadow'>
               {item.image && (
                 <img src={item.image} alt={item.title} className='w-full h-40 object-cover rounded mb-2' />
               )}
@@ -39,7 +40,7 @@ const News = () => {
               <span className='text-xs text-gray-400 mt-auto'>
                 {item.createdAt ? new Date(item.createdAt).toLocaleString() : ''}
               </span>
-            </div>
+            </Link>
           ))
         )}
       </div>

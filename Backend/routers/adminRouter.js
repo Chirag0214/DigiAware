@@ -113,20 +113,20 @@ router.get('/stats', async (req, res) => {
         const User = require('../models/userModel');
         const Expert = require('../models/expertModel');
         const News = require('../models/addNewsModel');
-        const Artical = require('../models/addArticalModel');
+        const Article = require('../models/addArticleModel');
 
-        const [userCount, expertCount, newsCount, articalCount] = await Promise.all([
+        const [userCount, expertCount, newsCount, articleCount] = await Promise.all([
             User.countDocuments(),
             Expert.countDocuments(),
             News.countDocuments(),
-            Artical.countDocuments()
+            Article.countDocuments()
         ]);
 
         res.status(200).json({
             users: userCount,
             experts: expertCount,
             news: newsCount,
-            articles: articalCount
+            articles: articleCount
         });
     } catch (err) {
         console.error(err);

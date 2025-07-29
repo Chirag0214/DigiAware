@@ -41,6 +41,21 @@ router.get('/getbyid/:id', (req, res) => {
         });
 });
 
+// RESTful route to get news by ID
+router.get('/:id', (req, res) => {
+    Model.findById(req.params.id)
+        .then((result) => {
+            if (!result) {
+                return res.status(404).json({ message: 'News not found' });
+            }
+            res.status(200).json(result);
+        })
+        .catch((err) => {
+            res.status(500).json(err);
+            console.log(err);
+        });
+});
+
 //deleting a user by ID
 router.delete('/delete/:id', (req, res) => {
     Model.findByIdAndDelete(req.params.id)

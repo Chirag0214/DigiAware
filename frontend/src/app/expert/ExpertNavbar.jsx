@@ -15,10 +15,10 @@ const ExpertNavbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-slate-900 text-white shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
-        <div className="flex items-center gap-4">
+        <Link href="/" className="flex items-center gap-4 font-bold text-xl tracking-wide hover:underline">
           <Image src="/logo.png" alt="Logo" width={40} height={40} className="rounded-full object-cover" />
-          <span className="font-bold text-xl tracking-wide">DigiAware Expert</span>
-        </div>
+          DigiAware
+        </Link>
         <button
           className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Toggle navigation"
@@ -33,8 +33,8 @@ const ExpertNavbar = () => {
         </button>
         <div className={`flex-col md:flex-row md:flex items-center gap-4 md:gap-6 absolute md:static left-0 right-0 bg-slate-900 md:bg-transparent px-4 md:px-0 transition-all duration-300 ease-in-out ${mobileOpen ? 'flex top-full' : 'hidden md:flex'}`}>
           <Link href="/expert/profile" className="hover:underline py-2 md:py-0">Profile</Link>
-          <Link href="/expert/add-artical" className="hover:underline py-2 md:py-0">Add Article</Link>
-          <Link href="/expert/manage-artical" className="hover:underline py-2 md:py-0">Manage Articles</Link>
+          <Link href="/expert/add-article" className="hover:underline py-2 md:py-0">Add Article</Link>
+          <Link href="/expert/manage-article" className="hover:underline py-2 md:py-0">Manage Articles</Link>
           <Link href="/expert/handle-query" className="hover:underline py-2 md:py-0">Handle Queries</Link>
           <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded text-white font-semibold transition ml-0 md:ml-2 mt-2 md:mt-0" onClick={handleLogout}>Logout</button>
         </div>

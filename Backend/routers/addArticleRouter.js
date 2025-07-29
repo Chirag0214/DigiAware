@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const Model = require('../models/addArticalModel');
+const Model = require('../models/addArticleModel');
 
 const router = express.Router();
 

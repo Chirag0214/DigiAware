@@ -18,7 +18,7 @@ app.use(express.json());
 app.use('/user',UserRouter);
 app.use('/admin',AdminRouter);
 app.use('/expert',ExpertRouter);
-app.use('/artical', AddArticalRouter);
+app.use('/article', AddArticleRouter);
 app.use('/news', AddNewsRouter);
 app.use('/query', QueryRouter);
 app.use('/feedback', feedbackRouter);

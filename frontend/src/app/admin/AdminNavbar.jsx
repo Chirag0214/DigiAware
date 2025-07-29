@@ -7,9 +7,10 @@ const AdminNavbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-slate-900 text-white shadow-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3 md:py-4">
-        <div className="flex items-center gap-4">
-          <span className="font-bold text-xl tracking-wide">DigiAware Admin</span>
-        </div>
+        <Link href="/" className="flex items-center gap-4 font-bold text-xl tracking-wide hover:underline">
+          <img src="/logo.png" alt="Logo" width={40} height={40} className="rounded-full object-cover" />
+          DigiAware
+        </Link>
         <button
           className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-white"
           aria-label="Toggle navigation"

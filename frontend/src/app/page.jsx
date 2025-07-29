@@ -43,7 +43,7 @@ const Home = () => {
 
         {/* Cyber Awareness Section with Cards */}
         <section className="py-16 px-4 bg-black/80 text-white text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-cyan-400">Stay Cyber Aware</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-cyan-400">Stay Digi Aware</h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto text-gray-300">
             Protect yourself online with these essential tips and resources. Cybersecurity is everyone's responsibility!
           </p>
